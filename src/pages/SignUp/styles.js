@@ -27,10 +27,12 @@ export const FormInput = styled(Input)`
 export const SubmitButton = styled(Button)`
   margin-top: 5px;
   width: 267px;
+  align-self: center;
 `;
 
 export const SignLink = styled.TouchableOpacity`
   margin-top: 20px;
+  align-self: center;
 `;
 
 export const SignLinkText = styled.Text`

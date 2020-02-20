@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Image } from 'react-native';
 import logoNome from '~/assets/logoNome.png';
 import Background from '~/components/Background';
-
+import { signUpRequest } from '~/store/modules/auth/actions';
 import {
   Container,
   ScrollView,
@@ -16,8 +17,15 @@ import {
 export default function SignUp({ navigation }) {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const dispatch = useDispatch();
 
-  function handleSubmit() {}
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  function handleSubmit() {
+    dispatch(signUpRequest(name, email, password));
+  }
   return (
     <Background>
       <Container>
@@ -32,6 +40,8 @@ export default function SignUp({ navigation }) {
               placeholder="Nome completo"
               returnKeyType="next"
               onSubmitEditing={() => emailRef.current.focus()}
+              value={name}
+              onChangeText={setName}
             />
             <FormInput
               icon="mail-outline"
@@ -42,6 +52,8 @@ export default function SignUp({ navigation }) {
               ref={emailRef}
               returnKeyType="next"
               onSubmitEditing={() => passwordRef.current.focus()}
+              value={email}
+              onChangeText={setEmail}
             />
             <FormInput
               icon="lock-outline"
@@ -50,6 +62,8 @@ export default function SignUp({ navigation }) {
               ref={passwordRef}
               returnKeyType="send"
               onSubmitEditing={handleSubmit}
+              value={password}
+              onChangeText={setPassword}
             />
           </Form>
           <SubmitButton onPress={handleSubmit}>Entrar</SubmitButton>
