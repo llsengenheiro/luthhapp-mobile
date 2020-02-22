@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+
 import { Image } from 'react-native';
 import logoNomeMenor from '~/assets/logoNomeMenor.png';
 import Background from '~/components/Background';
@@ -39,7 +39,6 @@ export default function clientRegister() {
           <Form>
             <FormInput
               icon="business"
-              keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
               placeholder="Nome completo"
