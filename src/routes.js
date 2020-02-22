@@ -1,26 +1,23 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import React from 'react';
 
+import { createStackNavigator } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
 import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import Home from './pages/Home';
-import clientRegister from './pages/Client/clientRegister';
 
-export default (signedIn = false) =>
-  createAppContainer(
-    createSwitchNavigator(
-      {
-        Sign: createSwitchNavigator({
-          SignIn,
-          SignUp,
-        }),
-        App: createBottomTabNavigator({
-          clientRegister,
-          Home,
-        }),
-      },
-      {
-        initialRouteName: signedIn ? 'App' : 'Sign',
-      }
-    )
+import homeRoutes from './routes/homeRoutes';
+
+const Stack = createStackNavigator();
+
+export default function Routes() {
+  const signed = useSelector(state => state.auth.signed);
+
+  return (
+    <Stack.Navigator headerMode="none">
+      {!signed ? (
+        <Stack.Screen name="SignIn" component={SignIn} />
+      ) : (
+        <Stack.Screen name="Home" component={homeRoutes} />
+      )}
+    </Stack.Navigator>
   );
+}
