@@ -48,7 +48,10 @@ export default function List({ navigation }) {
           renderItem={({ item }) => (
             <AreaInfo
               onPress={() =>
-                navigation.push('Service', { id: item.id, client: item.name })
+                navigation.push('CreateService', {
+                  id: item.id,
+                  client: item.name,
+                })
               }
             >
               <AreaDate>

@@ -10,8 +10,8 @@ const Stack = createStackNavigator();
 export default function clientsRoutes() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Lista Clientes" component={clientList} />
-      <Stack.Screen name="Cadastro Cliente" component={clientRegister} />
+      <Stack.Screen name="clientList" component={clientList} />
+      <Stack.Screen name="clientRegister" component={clientRegister} />
     </Stack.Navigator>
   );
 }
