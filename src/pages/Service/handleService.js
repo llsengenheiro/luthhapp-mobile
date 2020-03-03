@@ -1,13 +1,13 @@
 import { Alert } from 'react-native';
 import api from '~/services/api';
 
-export async function CreateService(userId, clientId, type, defect) {
+export async function CreateService(client_id, type, defect) {
   try {
-    const response = await api.post('clients', {
-      name,
-      address,
-      cellphone,
-      contract,
+    const response = await api.post('services', {
+      client_id,
+      type,
+      defect,
+      status: 'aberta',
     });
     Alert.alert('Sucsso', 'Cadastro realizado.');
     console.tron.log(response);

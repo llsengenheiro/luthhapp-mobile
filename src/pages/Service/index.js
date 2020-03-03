@@ -20,7 +20,6 @@ export default function Service({ route, navigation }) {
   const { id } = route.params;
   const { client } = route.params;
 
-  console.tron.log(id, client);
   const [defect, setDefect] = useState();
   const [type, setType] = useState(0);
   const [types, setTypes] = useState([
@@ -33,7 +32,8 @@ export default function Service({ route, navigation }) {
   ]);
 
   function handleSubmit() {
-    CreateService();
+    CreateService(id, types[type].name, defect);
+    navigation.navigate('Home');
   }
 
   return (
@@ -74,9 +74,7 @@ export default function Service({ route, navigation }) {
               onChangeText={setDefect}
             />
           </Form>
-          <SubmitButton onPress={() => navigation.goBack()}>
-            Solicitar
-          </SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Solicitar</SubmitButton>
         </ScrollView>
       </Container>
     </Background>
