@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 
 import { Container, DropPicker } from './styles';
 
-export default function Picker({ style, placeholder, ...rest }) {
+export default function Picker({ style, itens, ...rest }) {
   return (
     <Container style={style}>
-      <DropPicker />
-      <DropPicker.Item value="" label={placeholder} />
+      <DropPicker>
+        {itens.map((v, k) => {
+          console.tron.log(v);
+          return <DropPicker.Item key={k} value={k} label={v.name} />;
+        })}
+      </DropPicker>
     </Container>
   );
 }
 
 Picker.propTypes = {
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  placeholder: PropTypes.string.isRequired,
+  itens: PropTypes.arrayOf.isRequired,
 };
 Picker.defaultProps = {
   style: {},

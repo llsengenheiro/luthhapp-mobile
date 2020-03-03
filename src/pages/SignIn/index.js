@@ -6,14 +6,7 @@ import Background from '~/components/Background';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
-import {
-  Container,
-  Form,
-  FormInput,
-  SubmitButton,
-  SignLink,
-  SignLinkText,
-} from './styles';
+import { Container, Form, FormInput, SubmitButton } from './styles';
 
 export default function SignIn({ navigation }) {
   const passwordRef = useRef();
@@ -53,11 +46,8 @@ export default function SignIn({ navigation }) {
           />
         </Form>
         <SubmitButton loading={loading} onPress={handleSubmit}>
-          Login
+          LOGIN
         </SubmitButton>
-        <SignLink onPress={() => navigation.navigate('SignUp')}>
-          <SignLinkText>Criar Conta</SignLinkText>
-        </SignLink>
       </Container>
     </Background>
   );

@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 import SignIn from './pages/SignIn';
 
-import homeRoutes from './routes/homeRoutes';
+import tabRoutes from './routes/tabRoutes';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +16,7 @@ export default function Routes() {
       {!signed ? (
         <Stack.Screen name="SignIn" component={SignIn} />
       ) : (
-        <Stack.Screen name="Home" component={homeRoutes} />
+        <Stack.Screen name="Tab" component={tabRoutes} />
       )}
     </Stack.Navigator>
   );

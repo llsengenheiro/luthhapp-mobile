@@ -15,5 +15,10 @@ export const DropPicker = styled.Picker`
   font-size: 15px;
   margin-left: 10px;
 
+  padding: 0 15px;
+  height: 46px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+
   color: #fff;
 `;

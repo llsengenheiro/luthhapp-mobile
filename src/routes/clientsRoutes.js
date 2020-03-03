@@ -7,7 +7,7 @@ import clientList from '~/pages/Client/List';
 
 const Stack = createStackNavigator();
 
-export default function Routes() {
+export default function clientsRoutes() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Lista Clientes" component={clientList} />

@@ -1,18 +1,19 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Home from '../pages/Home';
-import clientRoutes from '~/routes/clietsRoutes';
-import SignUp from '../pages/SignUp';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Tab = createBottomTabNavigator();
+import Home from '~/pages/Home';
+import clientRegister from '~/pages/Client/clientRegister';
+import serviceRoutes from './serviceRoutes';
+
+const Stack = createStackNavigator();
 
 export default function homeRoutes() {
   return (
-    <Tab.Navigator initialRouteName="Cliente">
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Cliente" component={clientRoutes} />
-      <Tab.Screen name="Cadastro Usuário" component={SignUp} />
-    </Tab.Navigator>
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="clientRegister" component={clientRegister} />
+      <Stack.Screen name="serviceRoutes" component={serviceRoutes} />
+    </Stack.Navigator>
   );
 }

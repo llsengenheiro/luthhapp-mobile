@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Button, FlatList } from 'react-native';
 
-import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
 import api from '~/services/api';
@@ -17,7 +17,7 @@ import {
   AreaIcon,
 } from './styles';
 
-export default function List() {
+export default function List({ navigation }) {
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -32,6 +32,7 @@ export default function List() {
   return (
     <Background>
       <Container>
+        <Button title="Back" onPress={() => navigation.goBack()} />
         <TInput
           icon="search"
           autoCorrect={false}
@@ -45,7 +46,11 @@ export default function List() {
           showsVerticalScrollIndicator={false}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <AreaInfo>
+            <AreaInfo
+              onPress={() =>
+                navigation.push('Service', { id: item.id, client: item.name })
+              }
+            >
               <AreaDate>
                 <Name>{item.name}</Name>
                 <Address>{item.address}</Address>
