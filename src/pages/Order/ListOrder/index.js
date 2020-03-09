@@ -5,23 +5,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
 import api from '~/services/api';
 
-import {
-  Container,
-  AreaInfo,
-  AreaDate,
-  Name,
-  Address,
-  Cellphone,
-  AreaIcon,
-} from './styles';
+import { Container, AreaInfo, AreaDate, Name, AreaIcon } from './styles';
 
 export default function ListOrder({ navigation }) {
-  const [services, setServices] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     async function handleClients() {
-      const listServices = await api.get(`orders`);
-      setServices(listServices.data);
+      const listServices = await api.get(`orderopen`);
+      setOrders(listServices.data);
     }
     handleClients();
   }, []);
@@ -30,20 +22,17 @@ export default function ListOrder({ navigation }) {
     <Background>
       <Container>
         <FlatList
-          data={services}
+          data={orders}
           showsVerticalScrollIndicator={false}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <AreaInfo
-              onPress={() => navigation.push('ListTech', { service: item })}
-            >
+            <AreaInfo onPress={() => {}}>
               <AreaDate>
-                <Name>{item.client.name}</Name>
-                <Name>{item.type}</Name>
-                <Name>{item.defect}</Name>
-
-                <Address>{item.client.address}</Address>
-                <Cellphone>{item.client.cellphone}</Cellphone>
+                <Name>{item.service.client.name}</Name>
+                <Name>{item.service.type}</Name>
+                <Name>{item.description_defect}</Name>
+                <Name>{item.technical.name}</Name>
+                <Name>{item.service.status}</Name>
               </AreaDate>
               <AreaIcon>
                 <Icon

@@ -28,8 +28,8 @@ export default function Home({ navigation }) {
             <MenuButton onPress={() => navigation.push('clientRegister')}>
               <TextButton>Cadastrar Cliente</TextButton>
             </MenuButton>
-            <MenuButton>
-              <TextButton>Button1</TextButton>
+            <MenuButton onPress={() => navigation.push('ListOrder')}>
+              <TextButton>ListOrder</TextButton>
             </MenuButton>
           </Column>
         </AreaButtons>
