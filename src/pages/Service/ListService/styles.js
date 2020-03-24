@@ -22,7 +22,9 @@ export const AreaInfo = styled.TouchableOpacity`
 export const TInput = styled(Input)`
   margin: 10px;
 `;
-export const AreaDate = styled.View``;
+export const AreaDate = styled.View`
+  width: 75%;
+`;
 
 export const Name = styled.Text`
   font-size: 18px;

@@ -11,7 +11,6 @@ export async function CreateOrder(
       service_id,
       technical_id,
       description_defect,
-      status: 'programada',
     });
     Alert.alert('Sucsso', 'Ordem de serviço gerada.');
     console.tron.log(response);
