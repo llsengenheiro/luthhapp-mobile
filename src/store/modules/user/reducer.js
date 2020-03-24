@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export default function user(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case '@user/SIGN_IN_SUCCESS':
+    case '@auth/SIGN_IN_SUCCESS':
       return produce(state, draft => {
         draft.user = action.payload.user;
       });
