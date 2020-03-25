@@ -45,7 +45,9 @@ export default function ListOrder({ navigation }) {
           showsVerticalScrollIndicator={false}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <AreaInfo onPress={() => {}}>
+            <AreaInfo
+              onPress={() => navigation.push('CloseOrder', { order: item })}
+            >
               <AreaDate>
                 <Name>{item.service.client.name}</Name>
                 <Name>Sistema: {item.service.type}</Name>
