@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Alert } from 'react-native';
+import { FlatList } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
@@ -20,21 +21,29 @@ import {
 
 export default function ListOrder({ navigation }) {
   const [orders, setOrders] = useState([]);
+  const [refresh, setRefresh] = useState(true);
+  const isFocused = useIsFocused();
 
-  useEffect(() => {
-    async function listOrders() {
-      const listOrdersOpen = await api.get(`orderopen`);
-      setOrders(listOrdersOpen.data);
-    }
-    listOrders();
-  }, []);
-
-  function handleAcept(item) {
-    const aceppt_at = '2020-03-24T16:30';
-    AceptOrder(item.id, item.technical.id, aceppt_at, item.service.id);
+  async function listOrders() {
+    const listOrdersOpen = await api.get(`orderopen`);
+    setOrders(listOrdersOpen.data);
   }
-  function handleCancel(item) {
-    CancelOrder(item.id, item.service.id);
+  useEffect(() => {
+    if (refresh || isFocused) {
+      listOrders();
+      setRefresh(false);
+    }
+  }, [isFocused, refresh]);
+
+  async function handleAcept(id) {
+    await AceptOrder(id);
+    setRefresh(true);
+  }
+  async function handleCancel(id) {
+    const cancelOrder = await CancelOrder(id);
+    if (cancelOrder) {
+      setRefresh(true);
+    }
   }
 
   return (
@@ -58,11 +67,11 @@ export default function ListOrder({ navigation }) {
                 </Name>
               </AreaDate>
               {item.service.status === 'create' ? (
-                <AreaIcon onPress={() => handleAcept(item)}>
+                <AreaIcon onPress={() => handleAcept(item.id)}>
                   <Icon name="done" size={40} color="rgba(0,150,0,0.8)" />
                 </AreaIcon>
               ) : null}
-              <AreaIcon onPress={() => handleCancel(item)}>
+              <AreaIcon onPress={() => handleCancel(item.id)}>
                 <Icon name="cancel" size={40} color="rgba(255,0,0,0.8)" />
               </AreaIcon>
             </AreaInfo>

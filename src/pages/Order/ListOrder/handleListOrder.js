@@ -1,33 +1,25 @@
 import { Alert } from 'react-native';
 import api from '~/services/api';
 
-export async function AceptOrder(id, technical_id, aceppt_at, service_id) {
+export async function AceptOrder(id) {
+  let response;
   try {
-    console.tron.log(id, technical_id, aceppt_at, service_id);
-    const response = await api.put('order/technical/accept', {
+    response = await api.put('order/technical/accept', {
       id,
-      technical_id,
-      aceppt_at,
-      service_id,
     });
     Alert.alert('Sucsso', 'Ordem de serviço aceita');
-    console.tron.log(response);
   } catch (error) {
-    Alert.alert('Falha no Aceite', 'Verifique.');
+    Alert.alert('Falha no Aceite', `${response.error}`);
   }
 }
 
-export async function CancelOrder(id, service_id) {
+export async function CancelOrder(id) {
+  let response;
   try {
-    console.tron.log(id, service_id);
-    const response = await api.put('order/technical/cancel', {
-      id,
-      aceppt_at: null,
-      service_id,
-    });
+    response = await api.delete(`orders?id=${id}`);
     Alert.alert('Cancelada', 'Ordem de serviço cancelada');
-    console.tron.log(response);
+    return true;
   } catch (error) {
-    Alert.alert('Falha no Aceite', 'Verifique.');
+    Alert.alert('Falha no Aceite', `${response.error}`);
   }
 }
