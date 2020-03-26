@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
@@ -17,14 +18,17 @@ import {
 
 export default function ListService({ navigation }) {
   const [services, setServices] = useState([]);
+  const isFocused = useIsFocused();
 
+  async function loadServiesPeding() {
+    const listServices = await api.get(`services/peding`);
+    setServices(listServices.data);
+  }
   useEffect(() => {
-    async function handleClients() {
-      const listServices = await api.get(`services/peding`);
-      setServices(listServices.data);
+    if (isFocused) {
+      loadServiesPeding();
     }
-    handleClients();
-  }, []);
+  }, [isFocused]);
 
   return (
     <Background>
