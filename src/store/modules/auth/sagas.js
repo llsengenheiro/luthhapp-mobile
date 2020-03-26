@@ -42,6 +42,15 @@ export function* signUp({ payload }) {
     yield put(signFailure());
   }
 }
+
+export function* signOut() {
+  try {
+    yield put(signOut());
+  } catch (error) {
+    Alert.alert('Falha ao Sair:', 'Verifique');
+    yield put(signFailure());
+  }
+}
 export function setToken({ payload }) {
   if (!payload) return;
 
