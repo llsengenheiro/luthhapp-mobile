@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { Alert } from 'react-native';
 import Background from '~/components/Background';
 import { CreateOrder } from './handleOrder';
 
@@ -18,8 +19,9 @@ export default function Order({ route, navigation }) {
 
   const { tech, service } = route.params;
 
-  function handleSubmit() {
-    CreateOrder(service.id, tech.id, description_defect);
+  async function handleSubmit() {
+    await CreateOrder(service.id, tech.id, description_defect);
+
     navigation.popToTop();
   }
 
