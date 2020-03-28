@@ -1,9 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Image } from 'react-native';
+import OneSignal from 'react-native-onesignal';
 import logoNome from '~/assets/logoNome.png';
 import Background from '~/components/Background';
 import { signOut } from '~/store/modules/auth/actions';
+
 import {
   Container,
   ScrollView,
@@ -21,6 +23,26 @@ export default function Profile({ navigation }) {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  function receivedPush(notification) {
+    console.tron.log(`Recebido ${JSON.stringify(notification)}`);
+  }
+  function openedPush(openResult) {
+    console.tron.log(`Aberto ${JSON.stringify(openResult)}`);
+  }
+  function idsPush(push) {
+    console.tron.log(`IDS${JSON.stringify(push)}`);
+  }
+
+  useEffect(() => {
+    OneSignal.init('f5b5d57c-f68c-4802-9e35-b04559addd16', {
+      kOSSettingsKeyAutoPrompt: true,
+    });
+
+    OneSignal.addEventListener('received', receivedPush);
+    OneSignal.addEventListener('opened', openedPush);
+    OneSignal.addEventListener('ids', idsPush);
+  }, []);
 
   function handleSubmit() {}
 
