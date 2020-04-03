@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { setToken } from '~/services/api';
+// import { setToken } from '~/services/api';
 
 const INITIAL_STATE = {
   token: null,
